@@ -1,0 +1,56 @@
+.waButton {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 60px;
+  height: 60px;
+  background: #25D366; /* Official WhatsApp green */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.waButton:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+  background: #20BA56;
+}
+
+.icon {
+  position: relative;
+  z-index: 2;
+}
+
+/* Pulsing effect behind the button */
+.pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: rgba(37, 211, 102, 0.5);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulseAnim 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulseAnim {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .waButton {
+    bottom: 24px;
+    right: 24px;
+    width: 54px;
+    height: 54px;
+  }
+}
