@@ -348,8 +348,81 @@
 }
 
 @media (max-width: 1024px) {
+  /* Hide desktop nav items */
   .navLinks, .ctaBtn { display: none; }
+
+  /* Show hamburger */
   .menuToggle { display: flex; align-items: center; justify-content: center; }
-  .mobileMenu { display: block; }
-  .navInner, .topBarInner { padding: 0 24px; }
+
+  /* Reduce padding on inner bars */
+  .navInner, .topBarInner { padding: 0 20px; }
+
+  /* Hide top utility bar on mobile — it breaks layout */
+  .topBar { display: none; }
+
+  /* Navbar sits at top: 0 since topBar is hidden */
+  .navbar { top: 0; }
+
+  /* Mobile menu: full-width dropdown below the fixed navbar */
+  .mobileMenu {
+    display: block;
+    position: fixed;
+    top: 76px; /* matches .navInner height */
+    left: 0;
+    right: 0;
+    background: var(--white);
+    z-index: 999;
+    max-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    border-top: 2px solid var(--gold);
+  }
+
+  .mobileOpen {
+    max-height: calc(100vh - 76px);
+  }
+
+  /* Scrolled state: navbar shrinks, adjust mobile menu top */
+  .navbar.scrolled ~ * .mobileMenu,
+  .navbar.scrolled .mobileMenu {
+    top: 68px;
+  }
+
+  .mobileLinks { padding: 8px 0; list-style: none; }
+
+  .mobileLink {
+    display: block;
+    padding: 14px 24px;
+    color: var(--text-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mobileLink:hover { background: var(--bg-light); color: var(--primary); }
+
+  .mobileSub { background: var(--bg-light); }
+
+  .mobileSubLink {
+    display: block;
+    padding: 11px 40px;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobileSubLink:hover { color: var(--primary); }
+}
+
+@media (max-width: 480px) {
+  .navInner { height: 64px; }
+  .mobileMenu { top: 64px; }
+  .mobileOpen { max-height: calc(100vh - 64px); }
 }
