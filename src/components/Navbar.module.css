@@ -135,12 +135,13 @@
 
 .logoMain {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: #fff;
   line-height: 1;
   letter-spacing: -0.02em;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 .navbar.scrolled .logoMain {
@@ -370,13 +371,15 @@
     top: 76px; /* matches .navInner height */
     left: 0;
     right: 0;
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     z-index: 999;
     max-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.15);
     border-top: 2px solid var(--gold);
   }
 
@@ -400,13 +403,14 @@
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
     text-decoration: none;
     transition: background 0.2s, color 0.2s;
+    background: transparent;
   }
-  .mobileLink:hover { background: var(--bg-light); color: var(--primary); }
+  .mobileLink:hover { background: rgba(27,63,160,0.06); color: var(--primary); }
 
-  .mobileSub { background: var(--bg-light); }
+  .mobileSub { background: rgba(0,0,0,0.03); }
 
   .mobileSubLink {
     display: block;
@@ -415,10 +419,11 @@
     font-size: 0.84rem;
     font-weight: 500;
     text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.2s;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: transparent;
+    transition: color 0.2s, background 0.2s;
   }
-  .mobileSubLink:hover { color: var(--primary); }
+  .mobileSubLink:hover { color: var(--primary); background: rgba(27,63,160,0.04); }
 }
 
 @media (max-width: 480px) {

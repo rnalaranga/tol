@@ -82,7 +82,7 @@ export default function Navbar() {
                 <span>OL</span>
               </div>
               <div className={styles.logoText}>
-                <span className={styles.logoMain}>Orient Life</span>
+                <span className={styles.logoMain}>The Orient Life</span>
                 <span className={styles.logoSub}>Pvt Ltd</span>
               </div>
             </Link>
