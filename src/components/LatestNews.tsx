@@ -24,8 +24,8 @@ const news = [
     tag: 'Corporate News',
     date: 'March 28, 2026',
     readTime: '2 min read',
-    title: 'Orient Life Opens 48th Branch in Jaffna — Expanding Island-wide',
-    excerpt: 'In our continued commitment to serve all Sri Lankans, Orient Life proudly inaugurates its 48th branch, bringing premium financial services to the Northern Province.',
+    title: 'The Orient Life Reaches 50,000 Active Community Members',
+    excerpt: 'We are thrilled to announce a major milestone as our micro-finance and consumer goods network grows to support over 50,000 families across the nation.',
     color: '#1B3FA0',
   },
 ];

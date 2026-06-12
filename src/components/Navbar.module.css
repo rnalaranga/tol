@@ -1,11 +1,14 @@
 /* Top utility bar */
 .topBar {
-  background: transparent;
+  background: rgba(10, 20, 70, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 10px 0;
   position: absolute; /* Change to absolute so it scrolls with page, or fixed but transparent */
   top: 0; left: 0; right: 0;
   z-index: 1001;
   transition: opacity 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .topBar.scrolled {
