@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Phone, ChevronDown, Share2, MessageCircle, Globe, Heart } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
 const navLinks = [
@@ -115,11 +116,14 @@ export default function Navbar() {
               ))}
             </ul>
 
-            {/* CTA */}
-            <Link href="/contact" className={`btn btn-primary ${styles.ctaBtn}`}>
-              <Phone size={16} />
-              Get Started
-            </Link>
+            {/* Theme Toggle + CTA */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <ThemeToggle />
+              <Link href="/contact" className={`btn btn-primary ${styles.ctaBtn}`}>
+                <Phone size={16} />
+                Get Started
+              </Link>
+            </div>
 
             {/* Mobile toggle */}
             <button
@@ -165,11 +169,14 @@ export default function Navbar() {
           <Link href="/contact" className="btn btn-primary" style={{ margin: '16px 24px' }}>
             Get Started
           </Link>
-          <div style={{ display: 'flex', gap: '20px', padding: '16px 28px', borderTop: '1px solid var(--border)' }}>
-            <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Facebook"><Share2 size={20} /></a>
-            <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Twitter"><MessageCircle size={20} /></a>
-            <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="LinkedIn"><Globe size={20} /></a>
-            <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Instagram"><Heart size={20} /></a>
+          <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', gap: '20px' }}>
+              <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Facebook"><Share2 size={20} /></a>
+              <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Twitter"><MessageCircle size={20} /></a>
+              <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="LinkedIn"><Globe size={20} /></a>
+              <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Instagram"><Heart size={20} /></a>
+            </div>
+            <ThemeToggle />
           </div>
         </div>
       </nav>

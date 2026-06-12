@@ -43,7 +43,7 @@ export default function Footer() {
                   <span>OL</span>
                 </div>
                 <div className={styles.logoText}>
-                  <span className={styles.logoMain}>Orient Life</span>
+                  <span className={styles.logoMain}>The Orient Life</span>
                   <span className={styles.logoSub}>Pvt Ltd</span>
                 </div>
               </Link>
@@ -148,7 +148,7 @@ export default function Footer() {
           <div className={styles.bottomInner}>
             <div className={styles.copyrightBlock}>
               <p className={styles.copyright}>
-                © {new Date().getFullYear()} Orient Life Pvt Ltd. All rights reserved.
+                © {new Date().getFullYear()} The Orient Life Pvt Ltd. All rights reserved.
               </p>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
                 Designed and Developed by <strong style={{ color: 'rgba(255,255,255,0.7)' }}>RASHITHA NALARANGA</strong>

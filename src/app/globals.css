@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
+/* ── Light Theme (default) ── */
 :root {
   /* Brand Colors */
   --primary: #1B3FA0;
@@ -23,11 +24,13 @@
   --gray-700: #374151;
   --gray-900: #111827;
 
-  /* Semantic */
+  /* Semantic – light */
   --text-dark: #0D1B4B;
   --text-body: #374151;
   --text-muted: #6B7280;
+  --bg-page: #FFFFFF;
   --bg-light: #F7F9FF;
+  --bg-card: #FFFFFF;
   --border: #E5E7EB;
 
   /* Shadows */
@@ -46,6 +49,47 @@
   /* Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Theme color for status bar */
+  --theme-color: #1B3FA0;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  --primary: #4D7BFF;
+  --primary-dark: #3A63E8;
+  --primary-deeper: #1a2a6c;
+  --primary-light: #6B93FF;
+  --primary-glow: rgba(77, 123, 255, 0.25);
+
+  --gold: #E8C96A;
+  --gold-light: #F5DC8A;
+  --gold-dark: #C9A84C;
+
+  --white: #1E2030;
+  --gray-50: #252840;
+  --gray-100: #2D3050;
+  --gray-200: #363A5A;
+  --gray-300: #4A4F72;
+  --gray-500: #8890B5;
+  --gray-700: #C4CAEB;
+  --gray-900: #EEF0FF;
+
+  --text-dark: #EEF0FF;
+  --text-body: #C4CAEB;
+  --text-muted: #8890B5;
+  --bg-page: #12141F;
+  --bg-light: #1A1D2E;
+  --bg-card: #1E2030;
+  --border: #2D3050;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.4);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-blue: 0 8px 32px rgba(77,123,255,0.25);
+
+  --theme-color: #12141F;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,12 +97,13 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background: var(--white);
+  background: var(--bg-page);
   color: var(--text-body);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 h1, h2, h3 {
@@ -258,3 +303,129 @@ ul { list-style: none; }
 /* Text utilities */
 .text-center { text-align: center; }
 .text-gold { color: var(--gold); }
+
+/* ─────────────────────────────────────────
+   DARK MODE GLOBAL OVERRIDES
+   These ensure every element in every CSS
+   Module becomes readable in dark mode
+   without editing every individual file.
+───────────────────────────────────────── */
+[data-theme="dark"] body { background: var(--bg-page); color: var(--text-body); }
+
+/* Headings */
+[data-theme="dark"] h1, [data-theme="dark"] h2,
+[data-theme="dark"] h3, [data-theme="dark"] h4,
+[data-theme="dark"] h5, [data-theme="dark"] h6 { color: var(--text-dark); }
+
+/* All white backgrounds → card bg */
+[data-theme="dark"] [class*="card"],
+[data-theme="dark"] [class*="Card"],
+[data-theme="dark"] [class*="glass"],
+[data-theme="dark"] [class*="Glass"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-body);
+}
+
+/* Sections with light backgrounds */
+[data-theme="dark"] [class*="section"],
+[data-theme="dark"] [class*="Section"],
+[data-theme="dark"] section {
+  background-color: var(--bg-page);
+}
+
+/* Section eyebrow labels */
+[data-theme="dark"] .section-eyebrow { color: var(--primary); }
+
+/* Section headings */
+[data-theme="dark"] .section-heading { color: var(--text-dark); }
+
+/* Sub text */
+[data-theme="dark"] .section-subtext { color: var(--text-muted); }
+
+/* Bordered boxes */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+  background: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-body);
+}
+
+/* Links */
+[data-theme="dark"] a { color: inherit; }
+
+/* Navbar when scrolled */
+[data-theme="dark"] [class*="scrolled"] {
+  background: rgba(18, 20, 31, 0.95) !important;
+  border-color: var(--border) !important;
+}
+
+/* Hero glass panels */
+[data-theme="dark"] [class*="heroGlass"],
+[data-theme="dark"] [class*="sidebarGlass"] {
+  background: rgba(30, 32, 48, 0.9) !important;
+  border-color: rgba(77,123,255,0.2) !important;
+}
+
+/* Override hardcoded white backgrounds on sections */
+[data-theme="dark"] [style*="background: var(--white)"],
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background: white"] {
+  background: var(--bg-card) !important;
+}
+
+/* Smooth transitions on all elements */
+[data-theme="dark"] *,
+[data-theme="light"] * {
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.2s ease, box-shadow 0.35s ease;
+}
+
+/* Override for hero/slider sections that should stay dark */
+[data-theme="dark"] [class*="sliderWrap"],
+[data-theme="dark"] [class*="sahanaHero"],
+[data-theme="dark"] [class*="whyCard"],
+[data-theme="dark"] [class*="missionSection"],
+[data-theme="dark"] [class*="teamSection"],
+[data-theme="dark"] [class*="footer"],
+[data-theme="dark"] [class*="Footer"],
+[data-theme="dark"] footer {
+  background-color: unset;
+}
+
+/* Feature cards */
+[data-theme="dark"] [class*="featureCard"],
+[data-theme="dark"] [class*="valueCard"],
+[data-theme="dark"] [class*="teamCard"],
+[data-theme="dark"] [class*="branchCard"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+/* Step cards */
+[data-theme="dark"] [class*="step"] {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+/* Nav links scrolled text color */
+[data-theme="dark"] [class*="scrolled"] [class*="navLink"] {
+  color: var(--text-dark) !important;
+}
+[data-theme="dark"] [class*="scrolled"] [class*="logoMain"] {
+  color: var(--text-dark) !important;
+}
+[data-theme="dark"] [class*="scrolled"] [class*="logoSub"] {
+  color: var(--text-muted) !important;
+}
+
+/* Mobile menu */
+[data-theme="dark"] [class*="mobileMenu"] {
+  background: rgba(18, 20, 31, 0.92) !important;
+  backdrop-filter: blur(24px) !important;
+}
+[data-theme="dark"] [class*="mobileLink"],
+[data-theme="dark"] [class*="mobileSubLink"] {
+  color: var(--text-dark) !important;
+  border-color: var(--border) !important;
+}

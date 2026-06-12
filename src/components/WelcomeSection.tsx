@@ -8,7 +8,7 @@ export default function WelcomeSection() {
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.left}>
-          <div className={styles.eyebrow}>Welcome to Orient Life</div>
+          <div className={styles.eyebrow}>Welcome to The Orient Life</div>
           <h2 className={styles.title}>
             Where Trust Meets<br />
             <em>Financial Excellence</em>
