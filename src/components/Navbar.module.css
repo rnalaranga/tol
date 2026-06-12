@@ -55,8 +55,10 @@
   position: fixed;
   top: 37px; left: 0; right: 0;
   z-index: 1000;
-  background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(10, 20, 70, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
 }
@@ -361,8 +363,13 @@
   /* Hide top utility bar on mobile — it breaks layout */
   .topBar { display: none; }
 
-  /* Navbar sits at top: 0 since topBar is hidden */
-  .navbar { top: 0; }
+  /* Navbar sits at top: 0 since topBar is hidden, keep glass */
+  .navbar {
+    top: 0;
+    background: rgba(10, 20, 70, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
 
   /* Mobile menu: full-width dropdown below the fixed navbar */
   .mobileMenu {
