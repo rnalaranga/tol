@@ -278,6 +278,7 @@ a.contactValue:hover { color: var(--gold); }
 @media (max-width: 1024px) {
   .grid { grid-template-columns: 1fr 1fr; }
   .brandCol { padding-right: 0; }
+  .footerBottom { padding-bottom: 85px; } /* Lift text above the 65px mobile bottom bar */
 }
 
 @media (max-width: 768px) {
