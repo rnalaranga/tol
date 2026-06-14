@@ -137,10 +137,11 @@ export default function Navbar() {
             {/* Mobile toggle */}
             <button
               className={styles.menuToggle}
+              style={{ display: mobileOpen ? 'none' : '' }}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              <Menu size={24} />
             </button>
           </div>
         </div>

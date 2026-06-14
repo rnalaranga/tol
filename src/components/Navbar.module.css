@@ -75,6 +75,11 @@
   box-shadow: var(--shadow-md);
 }
 
+:global([data-theme="dark"]) .navbar.scrolled {
+  background: rgba(30, 32, 48, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
 .navInner {
   display: flex;
   align-items: center;
