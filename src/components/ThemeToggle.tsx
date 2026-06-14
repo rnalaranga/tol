@@ -60,7 +60,7 @@ export default function ThemeToggle() {
       {/* Friendly Tooltip */}
       {mounted && (
         <div className={`${styles.tooltip} ${showTooltip ? styles.tooltipVisible : ''}`}>
-          You can switch between Dark and Light Theme
+          Switch themes here! ✨
         </div>
       )}
     </div>
