@@ -210,7 +210,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Bottom Bar */}
-      <div className={styles.bottomBar}>
+      <div className={`${styles.bottomBar} ${scrolled ? styles.bottomBarScrolled : ''}`}>
         <Link href="/" className={styles.bottomLink}>
           <Home size={22} />
           <span>Home</span>

@@ -4,13 +4,13 @@
   right: 32px;
   width: 60px;
   height: 60px;
-  background: #25D366; /* Official WhatsApp green */
+  background: var(--primary);
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 4px 14px var(--primary-glow);
   z-index: 9999;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
@@ -18,8 +18,8 @@
 
 .waButton:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
-  background: #20BA56;
+  box-shadow: 0 6px 20px var(--primary-glow);
+  background: var(--primary-light);
 }
 
 .icon {
@@ -35,7 +35,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  background: rgba(37, 211, 102, 0.5);
+  background: var(--primary-glow);
   border-radius: 50%;
   z-index: 1;
   animation: pulseAnim 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
@@ -48,8 +48,8 @@
 
 @media (max-width: 768px) {
   .waButton {
-    bottom: 24px;
-    right: 24px;
+    bottom: 84px; /* Sits comfortably above the 65px mobile bottom bar */
+    right: 20px;
     width: 54px;
     height: 54px;
   }
