@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, ChevronDown, Share2, MessageCircle, Globe, Heart } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Share2, MessageCircle, Globe, Heart, Home, Briefcase } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
@@ -45,10 +45,21 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   return (
     <>
@@ -79,9 +90,7 @@ export default function Navbar() {
           <div className={styles.navInner}>
             {/* Logo */}
             <Link href="/" className={styles.logo}>
-              <div className={styles.logoIcon}>
-                <span>OL</span>
-              </div>
+              <img src={scrolled ? "/logo-blue.png" : "/logo-white.png"} alt="The Orient Life Logo" className={styles.logoImg} />
               <div className={styles.logoText}>
                 <span className={styles.logoMain}>The Orient Life</span>
                 <span className={styles.logoSub}>Pvt Ltd</span>
@@ -117,7 +126,7 @@ export default function Navbar() {
             </ul>
 
             {/* Theme Toggle + CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
               <ThemeToggle />
               <Link href="/contact" className={`btn btn-primary ${styles.ctaBtn}`}>
                 <Phone size={16} />
@@ -136,50 +145,85 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileOpen : ''}`}>
-          <ul className={styles.mobileLinks}>
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className={styles.mobileLink}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.label}
-                </Link>
-                {link.children && (
-                  <ul className={styles.mobileSub}>
-                    {link.children.map((child) => (
-                      <li key={child.label}>
-                        <Link
-                          href={child.href}
-                          className={styles.mobileSubLink}
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          — {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-          <Link href="/contact" className="btn btn-primary" style={{ margin: '16px 24px' }}>
-            Get Started
-          </Link>
-          <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', gap: '20px' }}>
+          <div className={styles.mobileHeader}>
+            <Link href="/" className={styles.logo} onClick={() => setMobileOpen(false)}>
+              <img src="/logo-blue.png" alt="The Orient Life Logo" className={styles.logoImg} style={{ height: '42px' }} />
+              <div className={styles.logoText}>
+                <span className={styles.logoMain} style={{ color: 'var(--text-dark)' }}>The Orient Life</span>
+              </div>
+            </Link>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                style={{ padding: '8px', color: 'var(--text-dark)', display: 'flex' }}
+              >
+                <X size={28} />
+              </button>
+            </div>
+          </div>
+
+          <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '100px' }}>
+            <ul className={styles.mobileLinks}>
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className={styles.mobileLink}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                  {link.children && (
+                    <ul className={styles.mobileSub}>
+                      {link.children.map((child) => (
+                        <li key={child.label}>
+                          <Link
+                            href={child.href}
+                            className={styles.mobileSubLink}
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            — {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <Link href="/contact" className="btn btn-primary" style={{ margin: '16px 24px', display: 'flex', justifyContent: 'center' }} onClick={() => setMobileOpen(false)}>
+              Get Started
+            </Link>
+            <div style={{ padding: '24px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
               <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Facebook"><Share2 size={20} /></a>
               <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Twitter"><MessageCircle size={20} /></a>
               <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="LinkedIn"><Globe size={20} /></a>
               <a href="#" style={{ color: 'var(--text-muted)' }} aria-label="Instagram"><Heart size={20} /></a>
             </div>
-            <ThemeToggle />
           </div>
         </div>
       </nav>
+
+      {/* Mobile Bottom Bar */}
+      <div className={styles.bottomBar}>
+        <Link href="/" className={styles.bottomLink}>
+          <Home size={22} />
+          <span>Home</span>
+        </Link>
+        <Link href="/services" className={styles.bottomLink}>
+          <Briefcase size={22} />
+          <span>Services</span>
+        </Link>
+
+        <Link href="/contact" className={styles.bottomLink}>
+          <Phone size={22} />
+          <span>Contact</span>
+        </Link>
+      </div>
     </>
   );
 }

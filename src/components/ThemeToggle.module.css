@@ -13,6 +13,7 @@
   width: 52px;
   height: 28px;
   border-radius: 100px;
+  /* Default: white-ish translucent for dark navbars (unscrolled) */
   background: rgba(255, 255, 255, 0.2);
   border: 1.5px solid rgba(255, 255, 255, 0.35);
   position: relative;
@@ -22,7 +23,13 @@
   padding: 2px;
 }
 
+:global([data-theme="dark"]) .track {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 .trackDark {
+  /* Keep class for compatibility but let the global dark mode handle it mostly */
   background: rgba(77, 123, 255, 0.3);
   border-color: rgba(77, 123, 255, 0.5);
 }
@@ -51,7 +58,7 @@
 }
 
 /* When scrolled (white navbar) — override track colors */
-:global(.scrolled-nav) .track {
-  background: rgba(27, 63, 160, 0.1);
-  border-color: var(--border);
+:global([class*="scrolled"]) .track {
+  background: rgba(27, 63, 160, 0.1) !important;
+  border-color: var(--border) !important;
 }

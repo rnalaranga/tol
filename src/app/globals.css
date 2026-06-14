@@ -100,7 +100,6 @@ body {
   background: var(--bg-page);
   color: var(--text-body);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.35s ease, color 0.35s ease;
@@ -355,9 +354,12 @@ ul { list-style: none; }
 /* Links */
 [data-theme="dark"] a { color: inherit; }
 
-/* Navbar when scrolled */
-[data-theme="dark"] [class*="scrolled"] {
-  background: rgba(18, 20, 31, 0.95) !important;
+/* Navbar when scrolled & Bottom Bar */
+[data-theme="dark"] [class*="scrolled"],
+[data-theme="dark"] [class*="bottomBar"] {
+  background: rgba(18, 20, 31, 0.90) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
   border-color: var(--border) !important;
 }
 

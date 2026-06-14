@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import styles from './ThemeToggle.module.css';
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -29,18 +29,20 @@ export default function ThemeToggle() {
     updateMetaThemeColor(next);
   }
 
-  if (!mounted) return null;
+  const isDarkTheme = mounted ? dark : false;
 
   return (
     <button
       className={styles.toggle}
       onClick={toggle}
-      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={dark ? 'Light Mode' : 'Dark Mode'}
+      aria-label={isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDarkTheme ? 'Light Mode' : 'Dark Mode'}
     >
-      <div className={`${styles.track} ${dark ? styles.trackDark : ''}`}>
+      <div className={`${styles.track} ${isDarkTheme ? styles.trackDark : ''}`}>
         <div className={styles.thumb}>
-          <span className={styles.icon}>{dark ? '🌙' : '☀️'}</span>
+          {mounted && (
+            <span className={styles.icon}>{isDarkTheme ? '🌙' : '☀️'}</span>
+          )}
         </div>
       </div>
     </button>

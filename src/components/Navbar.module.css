@@ -100,36 +100,12 @@
   flex-shrink: 0;
 }
 
-.logoMark {
-  width: 42px;
-  height: 42px;
-  background: var(--primary);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.logoImg {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
   flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.logoMark::after {
-  content: '';
-  position: absolute;
-  top: -8px; right: -8px;
-  width: 24px; height: 24px;
-  background: var(--gold);
-  border-radius: 50%;
-  opacity: 0.7;
-}
-
-.logoMark span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #fff;
-  position: relative;
-  z-index: 1;
+  transition: var(--transition);
 }
 
 .logoText {
@@ -317,17 +293,8 @@
 
 .mobileMenu {
   display: none;
-  background: var(--white);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
 }
-
-.navbar.scrolled .mobileMenu {
-  border-top: 1px solid var(--border);
-}
-
-.mobileOpen { max-height: 640px; }
+.mobileOpen {}
 
 .mobileLinks { padding: 12px 0; list-style: none; }
 
@@ -358,7 +325,13 @@
   .navLinks, .ctaBtn { display: none; }
 
   /* Show hamburger */
-  .menuToggle { display: flex; align-items: center; justify-content: center; }
+  .menuToggle { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    z-index: 1010;
+  }
 
   /* Reduce padding on inner bars */
   .navInner, .topBarInner { padding: 0 20px; }
@@ -367,40 +340,49 @@
   .topBar { display: none; }
 
   /* Navbar sits at top: 0 since topBar is hidden, keep glass */
-  .navbar {
-    top: 0;
-    background: rgba(10, 20, 70, 0.45);
+  .navbar { top: 0; }
+  .navbar:not(.scrolled) {
+    background: rgba(10, 20, 70, 0.6) !important;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
+  .navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
 
-  /* Mobile menu: full-width dropdown below the fixed navbar */
+  /* Mobile menu: Full screen slide-in overlay */
   .mobileMenu {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    top: 76px; /* matches .navInner height */
+    top: 0;
     left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    z-index: 999;
-    max-height: 0;
+    width: 100vw;
+    height: 100dvh;
+    background: var(--bg-card);
+    z-index: 1005; /* Ensure it's above the navbar and everything else */
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     overflow-x: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.15);
-    border-top: 2px solid var(--gold);
   }
 
   .mobileOpen {
-    max-height: calc(100vh - 76px);
+    transform: translateX(0);
   }
 
-  /* Scrolled state: navbar shrinks, adjust mobile menu top */
-  .navbar.scrolled ~ * .mobileMenu,
-  .navbar.scrolled .mobileMenu {
-    top: 68px;
+  /* Overlay header */
+  .mobileHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 76px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
   .mobileLinks { padding: 8px 0; list-style: none; }
@@ -438,6 +420,108 @@
 
 @media (max-width: 480px) {
   .navInner { height: 64px; }
-  .mobileMenu { top: 64px; }
-  .mobileOpen { max-height: calc(100vh - 64px); }
+  .mobileHeader { height: 64px; }
+}
+
+/* ─────────────────────────
+   Mobile Bottom Bar & Tooltip
+───────────────────────── */
+.bottomBar {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .bottomBar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 65px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    z-index: 1000;
+  }
+
+  .bottomLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .bottomLink:hover { color: var(--primary); }
+  
+  .bottomLinkToggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -24px;
+    background: var(--bg-card);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+}
+
+/* Tooltip Base */
+.themeTooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 12px;
+  background: var(--primary);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2000;
+}
+.themeTooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px; right: 20px;
+  width: 10px; height: 10px;
+  background: var(--primary);
+  transform: rotate(45deg);
+}
+
+/* Tooltip pointing down */
+.themeTooltip.tooltipTop {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 16px;
+  right: 50%;
+  transform: translateX(50%) translateY(10px);
+}
+.themeTooltip.tooltipTop::before {
+  top: auto;
+  bottom: -4px;
+  right: 50%;
+  margin-right: -5px;
+}
+
+/* Tooltip animation state */
+.themeTooltip.showTooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+.themeTooltip.tooltipTop.showTooltip {
+  transform: translateX(50%) translateY(0);
 }

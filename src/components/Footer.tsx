@@ -39,9 +39,7 @@ export default function Footer() {
             {/* Brand column */}
             <div className={styles.brandCol}>
               <Link href="/" className={styles.logo}>
-                <div className={styles.logoMark}>
-                  <span>OL</span>
-                </div>
+                <img src="/logo-white.png" alt="The Orient Life Logo" className={styles.logoImg} />
                 <div className={styles.logoText}>
                   <span className={styles.logoMain}>The Orient Life</span>
                   <span className={styles.logoSub}>Pvt Ltd</span>
